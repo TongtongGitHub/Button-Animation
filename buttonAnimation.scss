@@ -1,270 +1,564 @@
 /*
  * animation: name duration timing-function delay iteration-count direction;
- *      name: keyframe名称
- *      duration: 动画所需时间
- *      timing-function: 动画的速度曲线
- *      delay: 动画开始前的延迟
- *      iteration-count: 播放次数
- *      direction: 多次播放时，是否轮流反向播放
- * animation-fill-mode: 动画开始前和结束时的状态
- *      none: 默认
- *      forwards: 动画结束后，保持最后一个关键帧状态
- *      backwards: 动画开始前，保持第一个关键帧状态
+ * animation-fill-mode: the status of animation begining and ending
+ *      none: default
+ *      forwards: keep the status of last frame after ending
+ *      backwards: keep the status of first frame before starting
  *      both: forwards + backwards
  */
 
- @mixin Shake($animation:headShake 1s linear 0s 1 normal,$mode:none) {
- 	animation: $animation;
- 	animation-fill-mode:$mode;
- }
+@mixin Shake($animation:headShake 1s linear 0s 1 normal, $mode:none) {
+    animation: $animation;
+    animation-fill-mode: $mode;
+}
 
- .shake {
- 	@include Shake;
- }
+.shake {
+    @include Shake;
+}
 
- @keyframes headShake {
- 	0% {
- 		transform: translateX(0);
- 	}
+@keyframes headShake {
+    0% {
+        transform: translateX(0);
+    }
+    6.5% {
+        transform: translateX(-10px) rotate(-5deg);
+    }
+    18.5% {
+        transform: translateX(10px) rotate(5deg);
+    }
+    31.5% {
+        transform: translateX(-10px) rotate(-5deg);
+    }
+    43.5% {
+        transform: translateX(10px) rotate(5deg);
+    }
+    50% {
+        transform: translateX(0);
+    }
+}
 
- 	6.5% {
- 		transform: translateX(-10px) rotate(-5deg);
- 	}
+@mixin Rotate($animation:rotate-anim 1s linear 0s 1 normal, $mode:none) {
+    animation: $animation;
+    animation-fill-mode: $mode;
+}
 
- 	18.5% {
- 		transform: translateX(10px) rotate(5deg);
- 	}
+.rotate {
+    @include Rotate;
+}
 
- 	31.5% {
- 		transform: translateX(-10px) rotate(-5deg);
- 	}
+@keyframes rotate-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
- 	43.5% {
- 		transform: translateX(10px) rotate(5deg);
- 	}
+@mixin Scale($animation:scale-anim 1s linear 0s 1 normal, $mode:none) {
+    animation: $animation;
+    animation-fill-mode: $mode;
+}
 
- 	50% {
- 		transform: translateX(0);
- 	}
- }
+.scale {
+    @include Scale;
+}
 
- @mixin Rotate($animation:rotate-anim 1s linear 0s 1 normal,$mode:none) {
- 	animation: $animation;
- 	animation-fill-mode:$mode;
- }
-
- .rotate {
- 	@include Rotate;
- }
-
- @keyframes rotate-anim {
- 	0% {
- 		transform: rotate(0deg);
- 	}
-
- 	100% {
- 		transform: rotate(360deg);
- 	}
- }
-
- @mixin Scale($animation:scale-anim 1s linear 0s 1 normal,$mode:none) {
- 	animation: $animation;
- 	animation-fill-mode:$mode;
- }
-
- .scale {
- 	@include Scale;
- }
-
- @keyframes scale-anim {
- 	0% {
- 		transform: scale(1);
- 	}
-
- 	50% {
- 		transform: scale(2);
- 	}
- 	100% {
- 		transform: scale(1);
- 	}
- }
+@keyframes scale-anim {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
 /*
  *	button hover&active effects
  */
- @mixin animate-btn-fillLeftRight($back-color: #ccc, $transition: all 0.3s) {
- 	&:after {
- 		content: '';
- 		position: absolute;
- 		z-index: -1;
- 		transition: $transition;
- 		width: 0;
- 		height: 100%;
- 		top: 50%;
- 		left: 50%;
- 		background: $back-color;
- 		opacity: 0;
- 		transform: translateX(-50%) translateY(-50%);
- 	}
- 	&:hover:after {
- 		width: 100%;
- 		opacity: 1;
- 	}
- }
- .animate-btn-fillLeftRight {
- 	@include animate-btn-fillLeftRight;
- }
 
- @mixin animate-btn-fillBottom($back-color: #ccc, $transition: all 0.3s) {
- 	&:after {
- 		content: '';
- 		position: absolute;
- 		z-index: -1;
- 		transition: $transition;
- 		width: 100%;
- 		height: 0;
- 		top: 0;
- 		left: 0;
- 		background: $back-color;
- 		opacity: 0;
- 	}
- 	&:hover:after {
- 		height: 100%;
- 		opacity: 1;
- 	}
- }
- .animate-btn-fillBottom {
- 	@include animate-btn-fillBottom;
- }
+@mixin animate-btn-fillLeftRight($back-color: #ccc, $transition: all 0.3s) {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: $transition;
+        width: 0;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        background: $back-color;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    &:hover:after {
+        width: 100%;
+        opacity: 1;
+    }
+}
 
- @mixin animate-btn-fillRight($back-color: #ccc, $transition: all 0.3s) {
- 	&:after {
- 		content: '';
- 		position: absolute;
- 		z-index: -1;
- 		transition: $transition;
- 		width: 0;
- 		height: 100%;
- 		top: 0;
- 		left: 0;
- 		background: $back-color;
- 		opacity: 0;
- 	}
- 	&:hover:after {
- 		width: 100%;
- 		opacity: 1;
- 	}
- }
- .animate-btn-fillRight {
- 	@include animate-btn-fillRight;
- }
+.animate-btn-fillLeftRight {
+    @include animate-btn-fillLeftRight;
+}
 
- @mixin animate-btn-fillTopBottom($back-color: #ccc, $transition: all 0.3s) {
- 	&:after {
- 		content: '';
- 		position: absolute;
- 		z-index: -1;
- 		transition: $transition;
- 		width: 100%;
- 		height: 0;
- 		top: 50%;
- 		left: 50%;
- 		background: $back-color;
- 		opacity: 0;
- 		transform: translateX(-50%) translateY(-50%);
- 	}
- 	&:hover:after {
- 		height: 80%;
- 		opacity: 1;
- 	}
- 	&:active:after {
- 		height: 150%;
- 		opacity: 1;
- 	}
- }
- .animate-btn-fillTopBottom {
- 	@include animate-btn-fillTopBottom;
- }
+@mixin animate-btn-fillBottom($back-color: #ccc, $transition: all 0.3s) {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: $transition;
+        width: 100%;
+        height: 0;
+        top: 0;
+        left: 0;
+        background: $back-color;
+        opacity: 0;
+    }
+    &:hover:after {
+        height: 100%;
+        opacity: 1;
+    }
+}
 
- @mixin animate-btn-fillCorner($back-color: #ccc, $transition: all 0.3s) {
- 	&:after {
- 		content: '';
- 		position: absolute;
- 		z-index: -1;
- 		transition: $transition;
- 		width: 100%;
- 		height: 0;
- 		top: 50%;
- 		left: 50%;
- 		background: $back-color;
- 		opacity: 0;
- 		transform: translateX(-50%) translateY(-50%) rotate(45deg);
- 	}
- 	&:hover:after {
- 		height: 200%;
- 		opacity: 1;
- 	}
- 	&:active:after {
- 		height: 400%;
- 		opacity: 1;
- 	}
- }
- .animate-btn-fillCorner {
- 	@include animate-btn-fillCorner;
- }
+.animate-btn-fillBottom {
+    @include animate-btn-fillBottom;
+}
 
- @mixin animate-btn-fillBackground($back-color: #ccc, $transition: all 0.3s) {
- 	&:after {
- 		content: '';
- 		position: absolute;
- 		left: 0;
- 		top: 0;
- 		width: 100%;
- 		height: 100%;
- 		z-index: -1;
- 		transition: $transition;
- 	}
- 	&:hover:after {
- 		background: $back-color;
- 	}
- }
- .animate-btn-fillBackground {
- 	@include animate-btn-fillBackground;
- }
+@mixin animate-btn-fillRight($back-color: #ccc, $transition: all 0.3s) {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: $transition;
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: $back-color;
+        opacity: 0;
+    }
+    &:hover:after {
+        width: 100%;
+        opacity: 1;
+    }
+}
 
- @mixin animate-btn-slideDown($transition: all 0.3s) {
-     .icon, .text {
+.animate-btn-fillRight {
+    @include animate-btn-fillRight;
+}
+
+@mixin animate-btn-fillTopBottom($back-color: #ccc, $transition: all 0.3s) {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: $transition;
+        width: 100%;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        background: $back-color;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    &:hover:after {
+        height: 80%;
+        opacity: 1;
+    }
+    &:active:after {
+        height: 150%;
+        opacity: 1;
+    }
+}
+
+.animate-btn-fillTopBottom {
+    @include animate-btn-fillTopBottom;
+}
+
+@mixin animate-btn-fillCorner($back-color: #ccc, $transition: all 0.3s) {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: $transition;
+        width: 100%;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        background: $back-color;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    }
+    &:hover:after {
+        height: 200%;
+        opacity: 1;
+    }
+    &:active:after {
+        height: 400%;
+        opacity: 1;
+    }
+}
+
+.animate-btn-fillCorner {
+    @include animate-btn-fillCorner;
+}
+
+@mixin animate-btn-fillBackground($back-color: #ccc, $transition: all 0.3s) {
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        transition: $transition;
+    }
+    &:hover:after {
+        background: $back-color;
+    }
+}
+
+.animate-btn-fillBackground {
+    @include animate-btn-fillBackground;
+}
+
+@mixin animate-btn-slideDown($transition: all 0.3s) {
+    .icon,
+    .text {
         transition: $transition;
         transform: translateY(-100%);
         height: 100%;
         line-height: 100%;
-     }
-     &:hover .icon, &:hover .text {
+    }
+    &:hover .icon,
+    &:hover .text {
         transform: translateY(0);
-     }
- }
- .animate-btn-slideDown {
- 	@include animate-btn-slideDown;
- }
+    }
+}
 
- @mixin animate-btn-slideRight($transition: all 0.3s) {
-    .icon, .text {
+.animate-btn-slideDown {
+    @include animate-btn-slideDown;
+}
+
+@mixin animate-btn-slideRight($transition: all 0.3s) {
+    .icon,
+    .text {
         transition: $transition;
         width: 100%;
-     }
-     .icon {
+    }
+    .icon {
         transform: translateX(-100%);
-     }
-     .text {
-        transform: translateY(-100%); 
-     }
-     &:hover .text {
-        transform: translate(100%,-100%);
-     }
-     &:hover .icon {
+    }
+    .text {
+        transform: translateY(-100%);
+    }
+    &:hover .text {
+        transform: translate(100%, -100%);
+    }
+    &:hover .icon {
         transform: translateX(0);
-     }
- }
- .animate-btn-slideRight {
- 	@include animate-btn-slideRight;
- }
+    }
+}
+
+.animate-btn-slideRight {
+    @include animate-btn-slideRight;
+}
+
+.btn3a {
+    .icon {
+        width: 100%;
+        transform: translateX(-30%);
+    }
+    .text {
+        padding-left: 20%;
+        transform: translate(0, -100%);
+    }
+    &.btn-active {
+        .text {
+            animation: 0.5s fadeOutText;
+        }
+        .icon {
+            animation: 0.5s moveToRight;
+        }
+    }
+}
+
+@keyframes fadeOutText {
+    0% {
+        color: transparent;
+    } //当前元素属性透明，不包含子元素，当前元素的color为透明
+    80% {
+        color: transparent;
+    }
+    100% {
+        color: #000;
+    }
+}
+
+@keyframes moveToRight {
+    80% {
+        transform: translateX(250%);
+    }
+    81% {
+        opacity: 1;
+        transform: translateX(250%);
+    } //右侧终点位置
+    82% {
+        opacity: 0;
+        transform: translateX(250%);
+    } //原地隐身
+    83% {
+        opacity: 0;
+        transform: translateX(-50%);
+    } //隐身移动到左侧
+    84% {
+        opacity: 1;
+        transform: translateX(-50%);
+    } //原地现行
+    100% {
+        transform: translateX(-30%);
+    }
+}
+
+.btn3b {
+    .icon {
+        width: 100%;
+        transform: translateX(-30%);
+        transform-origin: 80%;
+    }
+    .text {
+        padding-left: 20%;
+        transform: translate(0, -100%);
+    }
+    &.btn-active {
+        .icon {
+            animation: 0.5s scaleUp;
+        }
+    }
+}
+
+@keyframes scaleUp {
+    80% {
+        transform: scale(2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+.btn4a {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background: #ccc;
+        transition: none;
+    }
+}
+
+.btn4a.btn-active {
+    &:after {
+        animation: 1s fillToRight forwards;
+    }
+}
+
+@keyframes fillToRight {
+    to {
+        width: 100%;
+        background: #ccc;
+    }
+}
+
+.btn4b {
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 0;
+        background: #ccc;
+        transition: none;
+    }
+}
+
+.btn4b.btn-active {
+    &:after {
+        animation: 1s emptyBottom forwards;
+    }
+}
+
+@keyframes emptyBottom {
+    to {
+        height: 100%;
+        background: #ccc;
+    }
+}
+
+.btn5a {
+    .icon-before {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        color: red;
+    }
+    .icon-after {
+        display: block;
+        height: 100%;
+        margin: auto;
+        color: red;
+        transform: scale(0);
+    }
+}
+
+.btn5a.btn-active {
+    .icon-after {
+        animation: 0.8s scaleFade forwards;
+    }
+}
+
+@keyframes scaleFade {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+.btn5b {
+    .icon-before {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        color: red;
+    }
+    .icon-after {
+        display: block;
+        height: 100%;
+        margin: auto;
+        color: red;
+        transform: scale(0);
+    }
+}
+
+.btn5b.btn-active {
+    .icon-after {
+        animation: 0.3s dropDown forwards;
+    }
+}
+
+@keyframes dropDown {
+    0% {
+        transform: scale(4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn6a {
+    .icon-before {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        color: red;
+    }
+    .icon-after {
+        display: block;
+        height: 100%;
+        margin: auto;
+        color: red;
+        opacity: 0;
+    }
+}
+
+.btn6a.btn-active {
+    .icon-before {
+        opacity: 0;
+    }
+    .icon-after {
+        animation: moveUp 0.5s forwards;
+    }
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.btn6b {
+    .icon-before {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        color: red;
+    }
+    .icon-after {
+        display: block;
+        height: 100%;
+        margin: auto;
+        color: red;
+        opacity: 0;
+    }
+}
+
+.btn6b.btn-active {
+    animation: shake 0.5s;
+    .icon-before {
+        opacity: 0;
+    }
+    .icon-after {
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
+}
