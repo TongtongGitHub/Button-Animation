@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Button Animation</title>
+    <link rel="stylesheet" type="text/css" href="layout.css">
+    <link rel="stylesheet" type="text/css" href="buttonAnimation.css">
+    <script defer src="fontawesome-all.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li class="group1">
+                <div class="btn animate-btn-fillLeftRight">Button1</div>
+                <div class="btn animate-btn-fillBottom">Button2</div>
+                <div class="btn animate-btn-fillRight">Button3</div>
+                <div class="btn animate-btn-fillTopBottom">Button4</div>
+                <div class="btn animate-btn-fillCorner">Button5</div>
+                <div class="btn animate-btn-fillBackground">Button6</div>
+            </li>
+            <li class="group2">
+                <div class="btn animate-btn-slideDown">
+                    <i class="icon fas fa-shopping-cart fa-lg"></i>
+                    <div class="text">Button1</div>
+                </div>
+                <div class="btn animate-btn-slideRight">
+                    <i class="icon fas fa-shopping-cart fa-lg"></i>
+                    <div class="text">Button2</div>
+                </div>
+            </li>
+            <li class="group3">
+                <div class="btn btn3a">
+                    <i class="icon fas fa-plane fa-lg"></i>
+                    <div class="text">Button1</div>
+                </div>
+                <div class="btn btn3b"><i class="icon fas fa-envelope fa-lg"></i><div class="text">Button2</div></div>
+            </li>
+            <li class="group4">
+                <div class="btn btn4a"><i class="icon fas fa-play fa-lg"></i></div>
+                <div class="btn btn4b"><i class="icon fas fa-trash fa-lg"></i></div>
+            </li>
+            <li class="group5">
+                <div class="btn btn5a"><i class="icon-before far fa-heart fa-lg"></i><i class="icon-after fas fa-heart fa-lg"></i></div>
+                <div class="btn btn5b"><i class="icon-before far fa-star fa-lg"></i><i class="icon-after fas fa-star fa-lg"></i></div>
+            </li>
+            <li class="group6">
+                <div class="btn btn6a"><i class="icon-before fas fa-paper-plane fa-lg"></i><i class="icon-after far fa-smile fa-lg"></i></div>
+                <div class="btn btn6b"><i class="icon-before fas fa-paper-plane fa-lg"></i><i class="icon-after far fa-frown fa-lg"></i></div>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        let btn3a = document.getElementsByClassName('btn3a')[0];
+        let btn3b = document.getElementsByClassName('btn3b')[0];
+        let btn4a = document.getElementsByClassName('btn4a')[0];
+        let btn4b = document.getElementsByClassName('btn4b')[0];
+        let btn5a = document.getElementsByClassName('btn5a')[0];
+        let btn5b = document.getElementsByClassName('btn5b')[0];
+        let btn6a = document.getElementsByClassName('btn6a')[0];
+        let btn6b = document.getElementsByClassName('btn6b')[0];
+        function groupFunc(time) {
+            let _this = this;
+            this.className += ' btn-active';
+            setTimeout(function () {
+                _this.className = _this.className.replace("btn-active", "");
+            }, time);
+        }
+        btn3a.addEventListener('click', function () {
+            groupFunc.call(this,500);
+        });
+        btn3b.addEventListener('click', function () {
+            groupFunc.call(this,500);
+        });
+        btn4a.addEventListener('click', function () {
+            groupFunc.call(this,1200);
+        });
+        btn4b.addEventListener('click', function () {
+            groupFunc.call(this,1200);
+        });
+        btn5a.addEventListener('click', function () {
+            groupFunc.call(this,1200);
+        });
+        btn5b.addEventListener('click', function () {
+            groupFunc.call(this,1200);
+        });
+        btn6a.addEventListener('click', function () {
+            groupFunc.call(this,1200);
+        });
+        btn6b.addEventListener('click', function () {
+            groupFunc.call(this,1200);
+        });
+    </script>
+</body>
+
+</html>
